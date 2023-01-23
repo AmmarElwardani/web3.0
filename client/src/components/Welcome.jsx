@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
+import { TransactionsContext } from "../context/TransactionsContext";
 import { Loader } from "./";
 
 const Welcome = () => {
@@ -19,10 +20,10 @@ const Welcome = () => {
       className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
     />
   );
+  
+  const {connectWallet, currentAccount } = useContext(TransactionsContext);
+  
 
-  const connectWallet = () => {
-    console.log("Connected");
-  };
 
   const handleSubmit = () => {
     console.log("submit");
@@ -41,14 +42,14 @@ const Welcome = () => {
             Explore the crypto world. Buy and sell Cryptocurrencies easily on
             Krypto
           </p>
-          <button
+        {!currentAccount &&(  <button
             type="button"
             onClick={connectWallet}
             className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]
           "
           >
             <p className="text-white text-base font-semibold">Connect Wallet</p>
-          </button>
+          </button>)}
           <div className="grid sm:grid-cols-3 grid-cold-2 w-full mt-10">
             <div className={`rounded-tl-2xl ${commonStyles}`}>Reliabilty</div>
             <div className={commonStyles}>Security</div>
